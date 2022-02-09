@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
+import os
 
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ def get_picture():
 
     url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
 
-    querystring = {"sol":"1000","camera":"fhaz","api_key":"KXaVsIhdF4hYReZ1rMvWTqMw1m4OrAvd0idOLBq9"}
+    querystring = {"sol":"1000","camera":"fhaz","api_key": os.getenv("API_KEY")}
 
     response = requests.request("GET", url, params=querystring)
     resp = response.json()
